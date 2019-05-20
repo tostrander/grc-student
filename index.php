@@ -24,5 +24,10 @@ $f3->route('GET /', function($f3) {
 
 });
 
+//Define a route that displays student detail
+$f3->route('GET /detail/@sid', function($f3, $params){
+    echo $params['sid'];
+});
+
 //Run fat free
 $f3->run();
