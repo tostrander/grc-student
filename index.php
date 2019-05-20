@@ -13,8 +13,15 @@ $f3->set('DEBUG', 3);
 $db = new Database();
 
 //Define a default route
-$f3->route('GET /', function() {
-    echo "GRC Students";
+$f3->route('GET /', function($f3) {
+
+    global $db;
+    $students = $db->getStudents();
+
+    $f3->set('students', $students);
+    $template = new Template();
+    echo $template->render('views/all-students.html');
+
 });
 
 //Run fat free

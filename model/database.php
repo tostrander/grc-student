@@ -6,6 +6,8 @@
  * Time: 1:45 PM
  */
 
+require '/home/tostrand/config-student.php';
+
 class Database
 {
     private $_dbh;
@@ -19,16 +21,31 @@ class Database
     {
         try {
 
-            define("DB_DSN", "mysql:dbname=tostrand_it328");
-            define("DB_USERNAME", "tostrand_students");
-            define("DB_PASSWORD", "grc_user!");
-
             //Instantiate a db object
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            echo "Connected!";
+            //echo "Connected!!!";
             return $this->_dbh;
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    function getStudents()
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM student
+                ORDER BY last, first";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Return the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
