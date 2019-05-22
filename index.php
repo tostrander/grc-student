@@ -26,7 +26,19 @@ $f3->route('GET /', function($f3) {
 
 //Define a route that displays student detail
 $f3->route('GET /detail/@sid', function($f3, $params){
-    echo $params['sid'];
+    global $db;
+
+    $sid = $params['sid'];
+    $student = $db->getDetails($sid);
+
+    //Make the date pretty
+    $timestamp = strtotime($student['birthdate']);
+    $prettyDate = date('F j, Y', $timestamp);
+    $student['birthdate'] = $prettyDate;
+
+    $f3->set('student', $student);
+    $template = new Template();
+    echo $template->render('views/student-detail.html');
 });
 
 //Run fat free

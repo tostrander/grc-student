@@ -48,4 +48,24 @@ class Database
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    function getDetails($sid)
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM student
+                WHERE sid = :sid";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':sid', $sid, PDO::PARAM_STR);
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Return the result
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
 }
