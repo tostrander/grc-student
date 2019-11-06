@@ -40,7 +40,8 @@
     $sql = 'SELECT s.sid, s.first AS student_first, s.last AS student_last, s.advisor, a.advisor_id, 
             a.advisor_first, a.advisor_last 
             FROM student s, advisor a 
-            WHERE a.advisor_id = s.advisor';
+            WHERE a.advisor_id = s.advisor
+            ORDER BY student_last, student_first';
 
     //Send the query to the database
     $result = mysqli_query($cnxn, $sql);
