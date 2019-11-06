@@ -21,11 +21,11 @@
     <h3>Student Summary</h3>
 
     <?php
-    //Connect to db
-    $username = 'tostrand_grcuser';
-    $password = '*k*uyu*]N;,c';
+    //Connect to db; INSERT YOUR CREDENTIALS HERE!!!
+    $username = 'USERNAME_grcuser';
+    $password = 'PASSWORD';
     $hostname = 'localhost';
-    $database = 'tostrand_grc';
+    $database = 'USERNAME_grc';
 
     $cnxn = mysqli_connect($hostname, $username, $password, $database);
 
