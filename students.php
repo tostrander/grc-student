@@ -17,15 +17,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-
+    <div class="container">
     <h3>Student Summary</h3>
 
     <?php
-    //Connect to db; INSERT YOUR CREDENTIALS HERE!!!
-    $username = 'USERNAME_grcuser';
-    $password = 'PASSWORD';
+    //Connect to db --> ADD YOUR OWN CREDENTIALS!
+    $username = 'tostrand_grcuser';
+    $password = '*k*uyu*]N;,c';
     $hostname = 'localhost';
-    $database = 'USERNAME_grc';
+    $database = 'tostrand_grc';
 
     $cnxn = mysqli_connect($hostname, $username, $password, $database);
 
@@ -60,9 +60,11 @@
 
 ?>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
