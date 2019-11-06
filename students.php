@@ -22,10 +22,10 @@
 
     <?php
     //Connect to db --> ADD YOUR OWN CREDENTIALS!
-    $username = 'tostrand_grcuser';
-    $password = '*k*uyu*]N;,c';
+    $username = 'USERNAME_grcuser';
+    $password = 'PASSWORD';
     $hostname = 'localhost';
-    $database = 'tostrand_grc';
+    $database = 'USERNAME_grc';
 
     $cnxn = mysqli_connect($hostname, $username, $password, $database);
 
