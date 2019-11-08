@@ -14,27 +14,16 @@
 <head>
     <meta charset="UTF-8">
     <title>GRC Student Summary</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 </head>
 <body>
     <div class="container">
     <h3>Student Summary</h3>
 
     <?php
-    //Connect to db --> ADD YOUR OWN CREDENTIALS!
-    $username = 'USERNAME_grcuser';
-    $password = 'PASSWORD';
-    $hostname = 'localhost';
-    $database = 'USERNAME_grc';
 
-    $cnxn = mysqli_connect($hostname, $username, $password, $database);
-
-    //Test connection
-    if ($cnxn) {
-        echo "<p>Connected!</p>";
-    } else {
-        echo mysqli_connect_error();
-    }
+    require('/home/tostrand/connect.php');
 
     //Define the query
     $sql = 'SELECT s.sid, s.first AS student_first, s.last AS student_last, s.advisor, a.advisor_id, 
@@ -46,7 +35,19 @@
     //Send the query to the database
     $result = mysqli_query($cnxn, $sql);
     //var_dump($result);
+?>
 
+<table id="student-table" class="display">
+    <thead>
+        <tr>
+            <th>SID</th>
+            <th>Student Name</th>
+            <th>Advisor Name</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <?php
     //Print the results
     while ($row = mysqli_fetch_assoc($result)) {
         $sid = $row['sid'];
@@ -55,16 +56,29 @@
         $aFirst = $row['advisor_first'];
         $aLast = $row['advisor_last'];
 
-        echo "$sid - $sFirst $sLast, $aFirst $aLast<br>";
+        echo "<tr>
+                <td>$sid</td>
+                <td>$sLast, $sFirst</td>
+                <td>$aLast, $aFirst</td>
+              </tr>";
     }
+    ?>
 
-?>
+    </tbody>
+</table>
+
+<a href="new-student.html">Add a new student</a>
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $('#student-table').DataTable();
+</script>
 
 </body>
 </html>
