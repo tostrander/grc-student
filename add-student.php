@@ -23,7 +23,13 @@
     <h3>Student Confirmation</h3>
 
     <?php
-        /* var_dump($_POST);
+
+        //Print $_POST array, for testing purposes only
+        echo "<pre>";
+        var_dump($_POST);
+        echo "</pre>";
+
+        /*
         ["sid"]=>"8787878"
         ["firstName"]=>"Tina"
         ["lastName"]=>"Ostrander"
@@ -38,7 +44,8 @@
         //Validate the data
         $isValid = true;
 
-        if (isset($_POST['sid']) && strlen($_POST['sid']) == 11) {
+        //SID is required and must be 11 characters
+        if (!empty($_POST['sid']) && strlen($_POST['sid']) == 11) {
             $sid = mysqli_real_escape_string($cnxn, $_POST['sid']);
         }
         else {
@@ -46,27 +53,49 @@
             $isValid = false;
         }
 
-        if (isset($_POST['firstName'])) {
+        //First name is required
+        if (!empty($_POST['firstName'])) {
             $firstName = mysqli_real_escape_string($cnxn, $_POST['firstName']);
         } else {
             echo "<p>First name is required</p>";
             $isValid = false;
         }
-        $lastName = mysqli_real_escape_string($cnxn, $_POST['lastName']);
-        $birthdate = mysqli_real_escape_string($cnxn, $_POST['birthdate']);
-        $gpa = mysqli_real_escape_string($cnxn, $_POST['gpa']);
 
-        /*
-        if (isset($_POST['gpa'])
-            && $_POST['gpa'] > 0.0
-            && $_POST['gpa'] < 4.0) {
-            $gpa = $_POST['gpa'];
+        //Last name is required
+        if (!empty($_POST['lastName'])) {
+            $lastName = mysqli_real_escape_string($cnxn, $_POST['lastName']);
         } else {
-            echo "<p>GPA is required and must be 0-4</p>";
+            echo "<p>Last name is required</p>";
             $isValid = false;
         }
-        */
-        $advisor = mysqli_real_escape_string($cnxn, $_POST['advisor']);
+
+        //Birthdate is optional
+        if (!empty($_POST['birthdate'])) {
+            $birthdate = mysqli_real_escape_string($cnxn, $_POST['birthdate']);
+        } else {
+            $birthdate = "";
+        }
+
+        //GPA is not required, but if provided must be between 0.0 and 4.0
+        if (!empty($_POST['gpa'])) {
+
+            if ($_POST['gpa'] >= 0.0 && $_POST['gpa'] <= 4.0) {
+                $gpa = mysqli_real_escape_string($cnxn, $_POST['gpa']);
+            } else {
+                echo "<p>GPA must be between 0.0 and 4.0</p>";
+                $isValid = false;
+            }
+
+        } else {
+            $gpa = "";
+        }
+
+        //Advisor is optional
+        if ($_POST['advisor'] != "none") {
+            $advisor = mysqli_real_escape_string($cnxn, $_POST['advisor']);
+        } else {
+            $advisor = "";
+        }
 
         //Insert row if data is valid
         if ($isValid) {
@@ -75,12 +104,17 @@
                     VALUES ('$sid', '$firstName', 
                     '$lastName', '$birthdate',
                     '$gpa', '$advisor')";
-            echo $sql; //copy/paste into phpMyAdmin to test
 
+            //Print SQL statement, for testing purposes only
+            //copy/paste into phpMyAdmin to test
+            echo $sql;
+
+            //Send the query to the database
             $result = mysqli_query($cnxn, $sql);
 
             //If successful, print summary
             if ($result) {
+                echo "<h3>Student Summary</h3>";
                 echo "<p>SID: $sid</p>";
                 echo "<p>Student name: $firstName $lastName</p>";
                 echo "<p>Birthdate: $birthdate</p>";
@@ -93,10 +127,6 @@
     <a href="students.php">View student summary</a>
 
     </div>
-
-    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

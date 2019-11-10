@@ -40,9 +40,8 @@
         <div class="form-group">
             <label for="advisor">Advisor</label>
             <select id="advisor" name="advisor">
-                <option id="none">--Select--</option>
+                <option value="none">--Select--</option>
                 <?php
-                    //UPDATE THIS WITH YOUR OWN CONNECT PATH!
                     require ('/home/tostrand/connect.php');
                     $sql = 'SELECT * FROM advisor';
                     $result = mysqli_query($cnxn, $sql);
