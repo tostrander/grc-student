@@ -1,5 +1,8 @@
 <?php
 
+    //Turn on error reporting
+
+
     //Start a session
 
 
