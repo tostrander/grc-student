@@ -1,14 +1,22 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>GRC Students</title>
+    <meta charset="UTF-8">
+    <title>GRC Student</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-<h1>GRC Student Detail</h1>
 
-<p>SID: {{ @student['sid'] }}</p>
-<p>Name: {{ @student['last'] }}, {{ @student['first'] }}</p>
-<p>Birthdate: {{ @student['birthdate'] }}</p>
-<p>Advisor: {{ @student['advisor'] }}</p>
-<p>GPA: {{ @student['gpa'] }}</p>
+    <div class="container">
+        <h1>GRC Student Detail</h1>
+
+        <p>SID: {{ @student['sid'] }}</p>
+        <p>Name: {{ @student['last'] }}, {{ @student['first'] }}</p>
+        <p>Birthdate: {{ @student['birthdate'] }}</p>
+        <p>Advisor: {{ @student['advisor_first'] }} {{ @student['advisor_last'] }}</p>
+        <p>GPA: {{ @student['gpa'] }}</p>
+
+        <a href="{{ @BASE }}">Back to List</a>
+    </div>
 </body>
 </html>

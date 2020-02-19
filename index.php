@@ -11,34 +11,24 @@ $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
 $db = new Database();
+$controller = new StudentController($f3);
 
 //Define a default route
 $f3->route('GET /', function($f3) {
 
-    global $db;
-    $students = $db->getStudents();
-
-    $f3->set('students', $students);
-    $template = new Template();
-    echo $template->render('views/all-students.html');
-
+    $GLOBALS['controller']->home();
 });
 
 //Define a route that displays student detail
 $f3->route('GET /detail/@sid', function($f3, $params){
-    global $db;
 
-    $sid = $params['sid'];
-    $student = $db->getDetails($sid);
+    $GLOBALS['controller']->detail($params['sid']);
+});
 
-    //Make the date pretty
-    $timestamp = strtotime($student['birthdate']);
-    $prettyDate = date('F j, Y', $timestamp);
-    $student['birthdate'] = $prettyDate;
+//Define a route that displays student detail
+$f3->route('GET|POST /add', function($f3, $params){
 
-    $f3->set('student', $student);
-    $template = new Template();
-    echo $template->render('views/student-detail.html');
+    $GLOBALS['controller']->add();
 });
 
 //Run fat free

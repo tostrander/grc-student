@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GRC Student</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="styles/my-styles.css" >
+
+</head>
+<body>
+
+    <div class="container">
+    <h3>Add a New Student</h3>
+
+    <form id="student-form" action="#" method="post">
+
+        <div class="form-group">
+            <label for="sid">SID</label>
+            <input type="text" class="form-control"
+                   id="sid" name="sid" value="{{ @student['sid'] }}">
+            <span class="err">{{ @errors['sid'] }}</span>
+        </div>
+        <div class="form-group">
+            <label for="first">First name</label>
+            <input type="text" class="form-control"
+                   id="first" name="first" value="{{ @student['first'] }}">
+            <span class="err">{{ @errors['first'] }}</span>
+        </div>
+        <div class="form-group">
+            <label for="last">Last name</label>
+            <input type="text" class="form-control"
+                   id="last" name="last" value="{{ @student['last'] }}">
+            <span class="err">{{ @errors['last'] }}</span>
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Birthdate</label>
+            <input type="text" class="form-control"
+                   id="birthdate" name="birthdate" value="{{ @student['birthdate'] }}">
+            <span class="err">{{ @errors['birthdate'] }}</span>
+        </div>
+        <div class="form-group">
+            <label for="gpa">GPA</label>
+            <input type="text" class="form-control"
+                   id="gpa" name="gpa" value="{{ @student['gpa'] }}">
+            <span class="err">{{ @errors['gpa'] }}</span>
+        </div>
+        <div class="form-group">
+            <label for="advisor">Advisor</label>
+            <select id="advisor" name="advisor">
+                <option value="none">--Select--</option>
+
+                <repeat group="{{ @advisors }}" value="{{ @advisor }}">
+                    <option value="{{ @advisor['advisor_id'] }}"
+                        <check if="{{ @student['advisor'] == @advisor['advisor_id'] }}"">
+                            selected="selected"
+                        </check>
+                    >
+                        {{ @advisor['advisor_last'] }}, {{ @advisor['advisor_first'] }}
+                    </option>
+                </repeat>
+            </select>
+            <span class="err">{{ @errors['advisor'] }}</span>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary">
+            Submit
+        </button>
+
+    </form>
+    </div>
+
+    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
